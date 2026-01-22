@@ -1,0 +1,14 @@
+name: aqi_dbt
+version: "1.0.0"
+config-version: 2
+
+profile: aqi_dbt
+
+model-paths: ["models"]
+
+models:
+  aqi_dbt:
+    stg:
+      +materialized: view
+    mart:
+      +materialized: table

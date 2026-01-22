@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: fct_air_quality
+    columns:
+      - name: station
+        tests: [not_null]
+      - name: pollutant_id
+        tests: [not_null]
+      - name: observed_at
+        tests: [not_null]
+      - name: dq_flag
+        tests:
+          - accepted_values:
+              values: ["ok", "missing", "invalid_negative"]
