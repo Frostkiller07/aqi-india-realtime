@@ -2,7 +2,6 @@
 
 An end-to-end **local data engineering project** that ingests real-time air quality data for Indian cities, transforms it using **dbt**, validates data quality, and delivers **Tableau-ready analytics**.
 
-Built to demonstrate **production-style data workflows**, not just dashboards.
 
 ---
 
