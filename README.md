@@ -1,22 +1,73 @@
 # 🇮🇳 AQI India – End-to-End Data Engineering & Analytics Pipeline
 
-An end-to-end **local data engineering project** that ingests real-time air quality data for Indian cities, transforms it using **dbt**, validates data quality, and delivers **Tableau-ready analytics**.
+An end-to-end **local data engineering project** that ingests real-time air quality data for Indian cities, transforms it using **dbt**, validates data quality, and delivers interactive **Tableau dashboards** for insights on pollution trends and severity.
 
 
 ---
 
-## 🔍 What This Project Shows
+## Project Overview
 
-- API ingestion & deduplication
-- Relational data modeling (facts & dimensions)
-- Data quality testing with dbt
-- BI-ready data exports
-- Interactive Tableau dashboards
-- Reproducible, one-click pipeline execution
+This project demonstrates a complete analytics workflow:
+
+Ingest raw AQI data from a government API
+
+Store and model data in MySQL
+
+Transform data into analytics-ready fact tables using dbt
+
+Apply data quality tests
+
+Export curated datasets for visualization
+
+Build and publish dashboards on Tableau Public
+
+The entire pipeline is automated and can be run locally on a Windows machine using a single command.
 
 ---
 
-## 🧱 Tech Stack
+## Data Source
+
+Source: data.gov.in (Government of India Open Data Platform)
+
+Dataset: National Air Quality Index (AQI) – city-level pollutant observations
+
+Granularity: City, state, pollutant, daily measurements
+
+This dataset provides official air quality metrics such as PM2.5, PM10, NO₂, SO₂, CO, Ozone, and NH₃ across Indian cities.
+
+---
+
+## API Key Generation (data.gov.in)
+
+To access the AQI dataset, an API key from data.gov.in is required.
+
+Steps to generate the API key:
+
+Create an account at https://data.gov.in
+
+Log in and navigate to your User Dashboard
+
+Generate an API key under My API Keys
+
+Copy the key and store it securely in a .env file (never commit it)
+Create a `.env` file in the project root:
+
+```env
+DATA_GOV_IN_API_KEY=your_api_key_here
+DATA_GOV_IN_RESOURCE_ID=dataset_resource_id
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_DB=aqi
+MYSQL_USER=aqi_user
+MYSQL_PASSWORD=aqi_password
+```
+# Security note:
+The .env file is excluded from version control using .gitignore.
+A .env.example file is provided for reference.
+
+---
+
+## Tech Stack
 
 | Layer | Tools |
 |-----|------|
@@ -29,7 +80,7 @@ An end-to-end **local data engineering project** that ingests real-time air qual
 
 ---
 
-## 🧩 Architecture
+## Architecture
 
 data.gov.in API
 ↓
@@ -76,31 +127,8 @@ aqi-india-realtime/
 ├── run_pipeline_and_export.cmd # Full pipeline + export
 └── README.md
 
-
 ---
 
-## Environment Variables
-
-Create a `.env` file in the project root:
-
-```env
-# data.gov.in
-DATA_GOV_IN_API_KEY=your_api_key
-DATA_GOV_IN_RESOURCE_ID=resource_id
-
-# MySQL
-MYSQL_HOST=localhost
-MYSQL_PORT=3306
-MYSQL_DB=aqi
-MYSQL_USER=aqi_user
-MYSQL_PASSWORD=aqi_password
-```
-
-.env is never committed.
-Use .env.example as a reference.
-
-
- 
 ## How to Run the Pipeline (Windows)
 1️. Create virtual environment
 python -m venv .venv
@@ -172,7 +200,7 @@ Pollutant
 
 ## Design Decisions
 
-CSV exports used instead of live DB connection
+CSV exports are used instead of live DB connection
 (Tableau Public compatibility)
 
 Single-click pipeline for reproducibility
